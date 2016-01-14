@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 yum install -y httpd
-service start httpd
+service httpd start
 echo "Hello World" > /tmp/helloworld.txt
