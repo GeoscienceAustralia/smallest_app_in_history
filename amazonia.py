@@ -44,7 +44,7 @@
  -    add_security_group_egress(template, web_sg, "-1", "-1", "-1", cidr=PUBLIC_CIDR)		
  -    add_security_group_ingress(template, web_sg, "tcp", SSH_PORT, SSH_PORT, cidr=PUBLIC_CIDR)		
  -		
- -    elb = add_load_balancer(template, [template.public_subnet1, template.public_subnet2], 'HTTP:80/index.html', [elb_sg], dependson=[template.internet_gateway_attachment])		
+ -    elb = add_load_balancer(template, [template.public_subnet1, template.public_subnet2], 'HTTP:8080/index.html', [elb_sg], dependson=[template.internet_gateway_attachment])		
  -		
  -    web_launch_config = add_launch_config(template, keypair, [web_sg], WEB_IMAGE_ID, WEB_INSTANCE_TYPE, userdata=userdata)		
  -    #web_launch_config.AssociatePublicIpAddress = False		
