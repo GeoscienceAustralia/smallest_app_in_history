@@ -11,6 +11,7 @@ def main(args):
     bootstrap_location = args[2]
     bootstrap_file = open(bootstrap_location)
     userdata = bootstrap_file.read()
+
     vpc = ""
     template = DualAZenv(keypair, vpc)
 
