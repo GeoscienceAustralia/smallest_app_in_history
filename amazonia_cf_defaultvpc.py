@@ -9,11 +9,10 @@ def main(args):
     keypair = args[0]
     appname = args[1]
     bootstrap_location = args[2]
-
-    bootstrap_file= open(bootstrap_location)
+    bootstrap_file = open(bootstrap_location)
     userdata = bootstrap_file.read()
-
-    template = DualAZenv(keypair)
+    vpc = "vpc-4f75d52a"
+    template = DualAZenv(keypair, vpc)
 
     HTTP_PORT="8080"      # This variable is used to specify the port for general tomcat HTTP traffic
     HTTPS_PORT="443"    # This variable is used to specify the port for general HTTPS traffic
