@@ -2,8 +2,8 @@
 
 # pylint: disable=missing-docstring, invalid-name, line-too-long, redefined-outer-name, too-many-arguments
 import sys
-from amazonia_cf.cftemplates import *
-from amazonia_cf.amazonia_resources import *
+from amazonia.cftemplates import *
+from amazonia.amazonia_resources import *
 
 def main(args):
     keypair = args[0]
