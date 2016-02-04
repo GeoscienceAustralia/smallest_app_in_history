@@ -11,7 +11,7 @@ def main(args):
     bootstrap_location = args[2]
     bootstrap_file = open(bootstrap_location)
     userdata = bootstrap_file.read()
-    vpc = "DefaultVPC"
+    vpc = "vpc-54f39031"
     template = DualAZenv(keypair, vpc)
 
     HTTP_PORT="8080"      # This variable is used to specify the port for general tomcat HTTP traffic
