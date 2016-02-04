@@ -11,18 +11,16 @@ def main(args):
     bootstrap_location = args[2]
     bootstrap_file = open(bootstrap_location)
     userdata = bootstrap_file.read()
-
-    vpc_id = ""
-
-    template = DualAZenv(keypair, vpc_id)
+    vpc = "vpc-4f75d52a"
+    template = DualAZenv(keypair, vpc)
 
     HTTP_PORT="8080"      # This variable is used to specify the port for general tomcat HTTP traffic
     HTTPS_PORT="443"    # This variable is used to specify the port for general HTTPS traffic
     IAM_INSTANCE_PROFILE = "instance-iam-role-InstanceProfile-OGL42SZSIQRK"
     SSH_PORT="22"       # SSH Port
 
-    elb_sg = add_security_group(template, template.vpc_id)
-    web_sg = add_security_group(template, template.vpc_id)
+    elb_sg = add_security_group(template, template.vpc)
+    web_sg = add_security_group(template, template.vpc)
 
     # NAT Rules
     # all from web security group
