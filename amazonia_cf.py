@@ -15,7 +15,7 @@ def main(args):
     vpc = ""
     template = DualAZenv(keypair, vpc)
 
-    HTTP_PORT="8080"      # This variable is used to specify the port for general tomcat HTTP traffic
+    HTTP_PORT="80"      # This variable is used to specify the port for general tomcat HTTP traffic
     HTTPS_PORT="443"    # This variable is used to specify the port for general HTTPS traffic
     IAM_INSTANCE_PROFILE = "instance-iam-role-InstanceProfile-OGL42SZSIQRK"
     SSH_PORT="22"       # SSH Port
