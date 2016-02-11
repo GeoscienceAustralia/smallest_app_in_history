@@ -44,12 +44,12 @@ def main(args):
     add_security_group_egress(template, web_sg, "-1", "-1", "-1", cidr=PUBLIC_CIDR)
     add_security_group_ingress(template, web_sg, "tcp", SSH_PORT, SSH_PORT, cidr=PUBLIC_CIDR)
 
-    elb = add_load_balancer(template, [template.public_subnet1, template.public_subnet2], 'HTTP:80/index.html', [elb_sg], dependson=[template.internet_gateway_attachment])
+    elb = add_load_balancer(template, [template.public_subnet1, template.public_subnet2], 'HTTP:80/index.html', [elb_sg], dependson=[template.internet_gateway_attachment.title])
 
     web_launch_config = add_launch_config(template, keypair, [web_sg], WEB_IMAGE_ID, WEB_INSTANCE_TYPE, userdata=userdata)
     #web_launch_config.AssociatePublicIpAddress = False
     web_launch_config.IamInstanceProfile = IAM_INSTANCE_PROFILE
-    web_asg = add_auto_scaling_group(template, 2, [template.public_subnet1, template.public_subnet2], launch_configuration=web_launch_config, health_check_type="ELB", load_balancer=elb, dependson=[template.internet_gateway], multiAZ=True, app_name=appname)
+    web_asg = add_auto_scaling_group(template, 2, [template.public_subnet1, template.public_subnet2], launch_configuration=web_launch_config, health_check_type="ELB", load_balancer=elb, dependson=[template.internet_gateway.title], multiAZ=True, app_name=appname)
 
     print(template.to_json(indent=2, separators=(',', ': ')))
 
