@@ -48,6 +48,12 @@ def main(args):
 
     web_launch_config = add_launch_config(template, keypair, [web_sg], WEB_IMAGE_ID, WEB_INSTANCE_TYPE, userdata=userdata)
     #web_launch_config.AssociatePublicIpAddress = False
+
+    my_hiera_client = hiera.HieraClient(hiera_file, hiera_path=hiera_directory, application='smallest')
+
+    username = my_hiera_client.get("mytestapp::rds_user")
+    password = my_hiera_client.get("mytestapp::rds_password")
+
     web_launch_config.IamInstanceProfile = IAM_INSTANCE_PROFILE
     web_asg = add_auto_scaling_group(template, 2, [template.public_subnet1, template.public_subnet2], launch_configuration=web_launch_config, health_check_type="ELB", load_balancer=elb, dependson=[template.internet_gateway.title], multiAZ=True, app_name=appname)
 
