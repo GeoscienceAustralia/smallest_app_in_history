@@ -56,10 +56,11 @@ def main(args):
     db_sg = add_security_group(template, template.vpc)
 
     db_subnet_group = add_db_subnet_group(template, [template.public_subnet1, template.public_subnet2])
-    add_db(template, "postgres", db_subnet_group, username, password, db_security_groups=[db_sg], db_port=db_port)
+    db = add_db(template, "postgres", db_subnet_group, username, password, db_security_groups=[db_sg], db_port=db_port)
 
     web_launch_config.IamInstanceProfile = IAM_INSTANCE_PROFILE
     web_asg = add_auto_scaling_group(template, 2, [template.public_subnet1, template.public_subnet2], launch_configuration=web_launch_config, health_check_type="ELB", load_balancer=elb, dependson=[template.internet_gateway.title], multiAZ=True, app_name=appname)
+    web_asg.DependsOn = [db.title, elb.title]
 
     print(template.to_json(indent=2, separators=(',', ': ')))
 
