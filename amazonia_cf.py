@@ -49,9 +49,9 @@ def main(args):
     web_launch_config = add_launch_config(template, keypair, [web_sg], WEB_IMAGE_ID, WEB_INSTANCE_TYPE, userdata=userdata)
     #web_launch_config.AssociatePublicIpAddress = False
 
-    my_hiera_client = hiera.HieraClient(hiera_file, hiera_path=hiera_directory, application='smallest')
-    username = my_hiera_client.get("mytestapp::rds_user")
-    password = my_hiera_client.get("mytestapp::rds_password")
+    my_hiera_client = hiera.HieraClient(hiera_file, hiera_path=hiera_directory, application='smallest_app_in_history')
+    username = my_hiera_client.get("smallest_app_in_history::rds_user")
+    password = my_hiera_client.get("smallest_app_in_history::rds_password")
     db_port = 5432
     db_sg = add_security_group(template, template.vpc)
 
